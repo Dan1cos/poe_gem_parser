@@ -1,0 +1,11 @@
+WHITESPACE = _{ " " | "\t" | "\n" }
+separator = _{ "--------" }
+
+gem = { SOI ~ item_class ~ rarity ~ name ~ separator }
+
+item_class = { "Item Class: " ~ class }
+class = { "Support Gems" | "Skill Gems" }
+
+rarity = { "Rarity: Gem" }
+
+name = { ASCII_ALPHA+ }
