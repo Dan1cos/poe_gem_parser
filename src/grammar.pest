@@ -1,7 +1,20 @@
 WHITESPACE = _{ " " | "\t" | "\n" }
 separator = _{ "--------" }
 
-gem = { SOI ~ item_class ~ rarity ~ name ~ separator }
+gem = { SOI ~ item_class 
+            ~ rarity 
+            ~ name ~ separator
+            ~ tags 
+            ~ level 
+            ~ gem_changes? 
+            ~ quality? ~ separator 
+            ~ requirements ~ separator 
+            ~ description ~ separator
+            ~ modifiers? ~ separator?
+            ~ experience? ~ separator?
+            ~ usage ~ separator?
+            ~ corrupted? ~ separator?
+            ~ note?}
 
 item_class = { "Item Class: " ~ class }
 class = { "Support Gems" | "Skill Gems" }
@@ -9,3 +22,26 @@ class = { "Support Gems" | "Skill Gems" }
 rarity = { "Rarity: Gem" }
 
 name = { ASCII_ALPHA+ }
+
+tags = @{ ((!"\n" ~ ANY)*) }
+
+level = { "Level: " ~ ASCII_DIGIT+ ~ "(Max)"? }
+
+gem_changes = @{ (!(separator | quality) ~ ANY)* }
+
+quality = { "Quality: " ~ "+" ~ ASCII_DIGIT+ ~ "% (augmented)" }
+
+requirements = { "Requirements:" ~ (requirement)* }
+requirement = { ("Level: " | "Str: " | "Dex: " | "Int: ") ~ ASCII_DIGIT+ }
+
+description = @{ (!separator ~ ANY)* }
+
+modifiers = @{ (!separator ~ ANY)* }
+
+experience = { "Experience: " ~ ASCII_DIGIT+ ~ "/" ~ ASCII_DIGIT+ }
+
+usage = @{ (!separator ~ ANY)* }
+
+corrupted = { "Corrupted" }
+
+note = { "Note: " ~ ANY+ }
