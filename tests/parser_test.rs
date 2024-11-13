@@ -163,6 +163,22 @@ fn note_test() -> Result<()> {
 }
 
 #[test]
+fn whitespace_test() -> Result<()> {
+    let parsed_data = GemParser::parse(Rule::WHITESPACE, " ")?;
+    assert_eq!(parsed_data.as_str(), "");
+
+    Ok(())
+}
+
+#[test]
+fn separator_test() -> Result<()> {
+    let parsed_data = GemParser::parse(Rule::separator, "--------")?;
+    assert_eq!(parsed_data.as_str(), "");
+
+    Ok(())
+}
+
+#[test]
 fn gem_test() -> Result<()> {
     let gem = "Item Class: Support Gems
     Rarity: Gem
