@@ -131,6 +131,52 @@ fn note_test() -> Result<()> {
 }
 
 #[test]
+fn gem_test() -> Result<()> {
+    let gem = "Item Class: Support Gems
+    Rarity: Gem
+    Swiftbrand Support
+    --------
+    Brand, Support
+    Level: 21 (Max)
+    Cost & Reservation Multiplier: 130%
+    --------
+    Requirements:
+    Level: 72
+    Int: 114
+    --------
+    Supports skills which create brands.
+    --------
+    Supported Skills have 65% less Attached Duration
+    Supported Skills have 65% less Detached Duration
+    Supported Skills have 45% more Activation frequency
+    --------
+    This is a Support Gem. It does not grant a bonus to your character, but to skills in sockets connected to it. Place into an item socket connected to a socket containing the Skill Gem you wish to augment. Right click to remove from a socket.
+    --------
+    Corrupted
+    --------
+    Note: ~b/o 1 chisel";
+    
+    let parsed_data = ParsedGem::parse(gem)?;
+    assert_eq!(parsed_data.item_class, "Support Gems");
+    assert_eq!(parsed_data.rarity, "Gem");
+    assert_eq!(parsed_data.name, "Swiftbrand Support");
+    assert_eq!(parsed_data.tags, ["Brand", "Support"]);
+    assert_eq!(parsed_data.level, 21);
+    assert_eq!(parsed_data.gem_changes, Some(vec!["Cost & Reservation Multiplier: 130%".to_string()]));
+    assert_eq!(parsed_data.quality, 0);
+    assert_eq!(parsed_data.requirements, ["Level: 72", "Int: 114"]);
+    assert_eq!(parsed_data.description, "Supports skills which create brands.");
+    assert_eq!(parsed_data.modifiers, Some(vec![ "Supported Skills have 65% less Attached Duration".to_string(), "Supported Skills have 65% less Detached Duration".to_string(), "Supported Skills have 45% more Activation frequency".to_string()]));
+    assert_eq!(parsed_data.experience, None);
+    assert_eq!(parsed_data.usage, "This is a Support Gem. It does not grant a bonus to your character, but to skills in sockets connected to it. Place into an item socket connected to a socket containing the Skill Gem you wish to augment. Right click to remove from a socket.");
+    assert_eq!(parsed_data.corrupted, true);
+    assert_eq!(parsed_data.note, Some("Note: ~b/o 1 chisel".to_string()));
+
+    Ok(())
+}
+
+
+#[test]
 #[should_panic]
 fn error_test() {
     assert!(!GemParser::parse(Rule::name, "#wr0ng n4m3").is_err());

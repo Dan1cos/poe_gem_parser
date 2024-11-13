@@ -16,6 +16,7 @@ pub enum GemParseError {
 pub struct ParsedGem {
     pub item_class: String, 
     pub rarity: String,
+    pub name: String,
     pub tags: Vec<String>,
     pub level: i32,
     pub gem_changes: Option<Vec<String>>,
@@ -35,6 +36,7 @@ impl ParsedGem {
 
         let mut item_class = String::new();
         let mut rarity = String::new();
+        let mut name = String::new();
         let mut tags = Vec::new();
         let mut level = 0;
         let mut gem_changes = None;
@@ -51,6 +53,7 @@ impl ParsedGem {
             match pair.as_rule() {
                 Rule::class => item_class = pair.as_str().trim().to_string(),
                 Rule::rarity_type => rarity = pair.as_str().trim().to_string(),
+                Rule::name => name = pair.as_str().trim().to_string(),
                 Rule::tags => tags.extend(pair.as_str().split(",").map(|i| i.trim().to_string())),
                 Rule::gem_level => level = pair.as_str().trim().parse().unwrap(),
                 Rule::gem_changes => gem_changes = Some(pair.as_str().trim().split("\n").map(|i| i.trim().to_string()).collect()),
@@ -69,6 +72,7 @@ impl ParsedGem {
         Ok(ParsedGem {
             item_class, 
             rarity,
+            name,
             tags,
             level,
             gem_changes,
