@@ -14,7 +14,7 @@ pub enum GemParseError {
 
 #[derive(Debug)]
 pub struct ParsedGem {
-    pub item_class: String, 
+    pub item_class: String,
     pub rarity: String,
     pub name: String,
     pub tags: Vec<String>,
@@ -27,12 +27,13 @@ pub struct ParsedGem {
     pub experience: Option<String>,
     pub usage: String,
     pub corrupted: bool,
-    pub note: Option<String>
+    pub note: Option<String>,
 }
 
 impl ParsedGem {
     pub fn parse(input: &str) -> Result<Self, GemParseError> {
-        let parsed_pairs = GemParser::parse(Rule::gem, input).map_err(|e| GemParseError::ParseError(e.to_string()))?;
+        let parsed_pairs = GemParser::parse(Rule::gem, input)
+            .map_err(|e| GemParseError::ParseError(e.to_string()))?;
 
         let mut item_class = String::new();
         let mut rarity = String::new();
@@ -47,7 +48,7 @@ impl ParsedGem {
         let mut experience = None;
         let mut usage = String::new();
         let mut corrupted = false;
-        let mut note = None; 
+        let mut note = None;
 
         for pair in parsed_pairs.into_iter() {
             match pair.as_rule() {
@@ -56,21 +57,45 @@ impl ParsedGem {
                 Rule::name => name = pair.as_str().trim().to_string(),
                 Rule::tags => tags.extend(pair.as_str().split(",").map(|i| i.trim().to_string())),
                 Rule::gem_level => level = pair.as_str().trim().parse().unwrap(),
-                Rule::gem_changes => gem_changes = Some(pair.as_str().trim().split("\n").map(|i| i.trim().to_string()).collect()),
+                Rule::gem_changes => {
+                    gem_changes = Some(
+                        pair.as_str()
+                            .trim()
+                            .split("\n")
+                            .map(|i| i.trim().to_string())
+                            .collect(),
+                    )
+                }
                 Rule::gem_quality => quality = pair.as_str().trim().parse().unwrap(),
                 Rule::requirement => requirements.push(pair.as_str().trim().to_string()),
                 Rule::description => description = pair.as_str().trim().to_string(),
-                Rule::modifiers => modifiers = Some(pair.as_str().trim().split("\n").map(|i| i.trim().to_string()).collect()),
+                Rule::modifiers => {
+                    modifiers = Some(
+                        pair.as_str()
+                            .trim()
+                            .split("\n")
+                            .map(|i| i.trim().to_string())
+                            .collect(),
+                    )
+                }
                 Rule::gem_experience => experience = Some(pair.as_str().trim().to_string()),
                 Rule::usage => usage = pair.as_str().trim().to_string(),
                 Rule::corrupted => corrupted = true,
-                Rule::note => note = Some(pair.as_str().strip_prefix("Note: ").unwrap_or(pair.as_str()).trim().to_string()),
+                Rule::note => {
+                    note = Some(
+                        pair.as_str()
+                            .strip_prefix("Note: ")
+                            .unwrap_or(pair.as_str())
+                            .trim()
+                            .to_string(),
+                    )
+                }
                 _ => {}
             }
         }
 
         Ok(ParsedGem {
-            item_class, 
+            item_class,
             rarity,
             name,
             tags,
@@ -83,7 +108,7 @@ impl ParsedGem {
             experience,
             usage,
             corrupted,
-            note
+            note,
         })
     }
 }

@@ -16,7 +16,6 @@ fn credits() {
     println!("PoE Gem Parser by Artem Shakirov");
 }
 
-
 fn main() -> Result<()> {
     let args: Vec<String> = env::args().collect();
 
@@ -33,14 +32,14 @@ fn main() -> Result<()> {
             if args.len() < 4 {
                 println!("Wrong number of arguments for parsing file");
                 return Ok(());
-            } 
+            }
             let input_file = args[2].as_str();
             let output_file = args[3].as_str();
             let input = fs::read_to_string(input_file)?;
             let parsed = ParsedGem::parse(input.as_str())?;
             fs::write(output_file, format!("{:#?}", parsed))?;
-        },
-        gem => println!("{:#?}", ParsedGem::parse(gem)?)
+        }
+        gem => println!("{:#?}", ParsedGem::parse(gem)?),
     }
 
     Ok(())
