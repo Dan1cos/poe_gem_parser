@@ -10,24 +10,24 @@ Parser reads input string from arguments or file and splits it into components u
 
 ## Developed grammar rules
 
-WHITESPACE - any whitespace characters
-separator - separator between blocks
-gem - complete gem grammar rule
-item_class - class of item with "Item class:" string
-class - class of item
-rarity - rarity type of item with "Rarity:" string
-rarity_type - rarity type
+WHITESPACE - any whitespace characters  
+separator - separator between blocks  
+gem - complete gem grammar rule  
+item_class - class of item with "Item class:" string  
+class - class of item  
+rarity - rarity type of item with "Rarity:" string  
+rarity_type - rarity type  
 name - name of item  
 tags - tags of item  
-level - level of gem with "Level:" and "(Max)" strings
-gem_level - level of gem
+level - level of gem with "Level:" and "(Max)" strings  
+gem_level - level of gem  
 gem_changes - stats that are changed using this gem  
-quality - quality of gem with "Quality:" and "(augmented)" strings
-gem_quality - quality of gem
-requirements - requirements this gem with "Requirements:" string
-requirement - one of requirements
-description - description of the gem 
-modifiers - modifiers of gem
+quality - quality of gem with "Quality:" and "(augmented)" strings  
+gem_quality - quality of gem  
+requirements - requirements this gem with "Requirements:" string  
+requirement - one of requirements  
+description - description of the gem  
+modifiers - modifiers of gem  
 usage - how that gem should be used in a game  
 corrupted - is item corrupted or not  
 note - note  
