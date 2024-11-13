@@ -1,5 +1,8 @@
 # PoE Gem Parser in Rust
 
+Crate: https://crates.io/crates/poe_gem_parser  
+Docs: https://docs.rs/poe_gem_parser/0.1.0/poe_gem_parser  
+  
 A parser for normal gems from game "Path of Exile" written in Rust. Parser is written using `pest` library and can extract various fields(name, tags, level, requirements, etc.) of the selected gem. That project can be further extended for parsing not only gems, but also transfigured/vaal gems, items, fragments, etc. (Gem text for testing can be taken from Path of Exile's trade site)
 
 
