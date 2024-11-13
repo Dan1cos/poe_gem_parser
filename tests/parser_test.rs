@@ -27,6 +27,14 @@ fn rarity_test() -> Result<()> {
 }
 
 #[test]
+fn rarity_type_test() -> Result<()> {
+    let parsed_data = GemParser::parse(Rule::rarity_type, "Gem")?;
+    assert_eq!(parsed_data.as_str(), "Gem");
+
+    Ok(())
+}
+
+#[test]
 fn name_test() -> Result<()> {
     let parsed_data = GemParser::parse(Rule::name, "Enlighten Support")?;
     assert_eq!(parsed_data.as_str(), "Enlighten Support");
@@ -51,6 +59,14 @@ fn level_test() -> Result<()> {
 }
 
 #[test]
+fn gem_level_test() -> Result<()> {
+    let parsed_data = GemParser::parse(Rule::gem_level, "19")?;
+    assert_eq!(parsed_data.as_str(), "19");
+
+    Ok(())
+}
+
+#[test]
 fn changes_test() -> Result<()> {
     let parsed_data = GemParser::parse(Rule::gem_changes, "Attack Speed: 80% of base")?;
     assert_eq!(parsed_data.as_str(), "Attack Speed: 80% of base");
@@ -61,6 +77,14 @@ fn changes_test() -> Result<()> {
 #[test]
 fn quality_test() -> Result<()> {
     let parsed_data = GemParser::parse(Rule::quality, "Quality: +13% (augmented)")?;
+    assert_eq!(parsed_data.as_str(), "13");
+
+    Ok(())
+}
+
+#[test]
+fn gem_quality_test() -> Result<()> {
+    let parsed_data = GemParser::parse(Rule::gem_quality, "13")?;
     assert_eq!(parsed_data.as_str(), "13");
 
     Ok(())
@@ -101,6 +125,14 @@ fn modifiers_test() -> Result<()> {
 #[test]
 fn experience_test() -> Result<()> {
     let parsed_data = GemParser::parse(Rule::experience,  "Experience: 1/15249")?;
+    assert_eq!(parsed_data.as_str(), "1/15249");
+
+    Ok(())
+}
+
+#[test]
+fn gem_experience_test() -> Result<()> {
+    let parsed_data = GemParser::parse(Rule::gem_experience,  "1/15249")?;
     assert_eq!(parsed_data.as_str(), "1/15249");
 
     Ok(())
@@ -155,7 +187,7 @@ fn gem_test() -> Result<()> {
     Corrupted
     --------
     Note: ~b/o 1 chisel";
-    
+
     let parsed_data = ParsedGem::parse(gem)?;
     assert_eq!(parsed_data.item_class, "Support Gems");
     assert_eq!(parsed_data.rarity, "Gem");
@@ -170,7 +202,7 @@ fn gem_test() -> Result<()> {
     assert_eq!(parsed_data.experience, None);
     assert_eq!(parsed_data.usage, "This is a Support Gem. It does not grant a bonus to your character, but to skills in sockets connected to it. Place into an item socket connected to a socket containing the Skill Gem you wish to augment. Right click to remove from a socket.");
     assert_eq!(parsed_data.corrupted, true);
-    assert_eq!(parsed_data.note, Some("Note: ~b/o 1 chisel".to_string()));
+    assert_eq!(parsed_data.note, Some("~b/o 1 chisel".to_string()));
 
     Ok(())
 }

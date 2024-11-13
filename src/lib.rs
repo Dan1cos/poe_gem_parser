@@ -64,7 +64,7 @@ impl ParsedGem {
                 Rule::gem_experience => experience = Some(pair.as_str().trim().to_string()),
                 Rule::usage => usage = pair.as_str().trim().to_string(),
                 Rule::corrupted => corrupted = true,
-                Rule::note => note = Some(pair.as_str().trim().to_string()),
+                Rule::note => note = Some(pair.as_str().strip_prefix("Note: ").unwrap_or(pair.as_str()).trim().to_string()),
                 _ => {}
             }
         }
