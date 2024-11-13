@@ -14,6 +14,7 @@ fn main() -> Result<()> {
     --------
     Requirements:
     Level: 8
+    Int: 20
     --------
     Supports spells, or attacks that use bows or wands. Instead of using that skill, you will throw a trap that will use the skill for you when an enemy walks near it. Traps cannot use channelling skills.
     --------
@@ -61,7 +62,9 @@ fn main() -> Result<()> {
     Note: ~price 1 chaos";
 
     
-    let parsed = Grammar::parse(Rule::gem, gem_text)?;
+    // let parsed = GemParser::parse(Rule::gem, gem_text)?;
+
+    let parsed = ParsedGem::parse(gem_text);
 
     println!("{:#?}", parsed);
 

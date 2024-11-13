@@ -1,7 +1,7 @@
 WHITESPACE = _{ " " | "\t" | "\n" }
 separator = _{ "--------" }
 
-gem = { SOI ~ item_class 
+gem = _{ SOI ~ item_class 
             ~ rarity 
             ~ name ~ separator
             ~ tags 
@@ -16,29 +16,33 @@ gem = { SOI ~ item_class
             ~ corrupted? ~ separator?
             ~ note?}
 
-item_class = { "Item Class: " ~ class }
+item_class = _{ "Item Class: " ~ class }
 class = { "Support Gems" | "Skill Gems" }
 
-rarity = { "Rarity: Gem" }
+rarity = _{ "Rarity: " ~ rarity_type}
+rarity_type = { "Gem" }
 
 name = { ASCII_ALPHA+ }
 
 tags = @{ ((!"\n" ~ ANY)*) }
 
-level = { "Level: " ~ ASCII_DIGIT+ ~ "(Max)"? }
+level = _{ "Level: " ~ gem_level ~ "(Max)"? }
+gem_level = { ASCII_DIGIT+ }
 
 gem_changes = @{ (!(separator | quality) ~ ANY)* }
 
-quality = { "Quality: " ~ "+" ~ ASCII_DIGIT+ ~ "% (augmented)" }
+quality = _{ "Quality: " ~ "+" ~ gem_quality ~ "% (augmented)" }
+gem_quality = { ASCII_DIGIT+ }
 
-requirements = { "Requirements:" ~ (requirement)* }
+requirements = _{ "Requirements:" ~ (requirement)* }
 requirement = { ("Level: " | "Str: " | "Dex: " | "Int: ") ~ ASCII_DIGIT+ }
 
 description = @{ (!separator ~ ANY)* }
 
 modifiers = @{ (!separator ~ ANY)* }
 
-experience = { "Experience: " ~ ASCII_DIGIT+ ~ "/" ~ ASCII_DIGIT+ }
+experience = _{ "Experience: " ~ gem_experience }
+gem_experience = { ASCII_DIGIT+ ~ "/" ~ ASCII_DIGIT+ }
 
 usage = @{ (!separator ~ ANY)* }
 

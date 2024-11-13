@@ -4,15 +4,15 @@ use pest::Parser;
 
 #[test]
 fn item_class_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::item_class, "Item Class: Support Gems")?;
-    assert_eq!(parsed_data.as_str(), "Item Class: Support Gems");
+    let parsed_data = GemParser::parse(Rule::item_class, "Item Class: Support Gems")?;
+    assert_eq!(parsed_data.as_str(), "Support Gems");
 
     Ok(())
 }
 
 #[test]
 fn class_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::class, "Skill Gems")?;
+    let parsed_data = GemParser::parse(Rule::class, "Skill Gems")?;
     assert_eq!(parsed_data.as_str(), "Skill Gems");
 
     Ok(())
@@ -20,15 +20,15 @@ fn class_test() -> Result<()> {
 
 #[test]
 fn rarity_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::rarity, "Rarity: Gem")?;
-    assert_eq!(parsed_data.as_str(), "Rarity: Gem");
+    let parsed_data = GemParser::parse(Rule::rarity, "Rarity: Gem")?;
+    assert_eq!(parsed_data.as_str(), "Gem");
 
     Ok(())
 }
 
 #[test]
 fn name_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::name, "Enlighten Support")?;
+    let parsed_data = GemParser::parse(Rule::name, "Enlighten Support")?;
     assert_eq!(parsed_data.as_str(), "Enlighten Support");
 
     Ok(())
@@ -36,7 +36,7 @@ fn name_test() -> Result<()> {
 
 #[test]
 fn tags_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::tags, "Attack, AoE")?;
+    let parsed_data = GemParser::parse(Rule::tags, "Attack, AoE")?;
     assert_eq!(parsed_data.as_str(), "Attack, AoE");
 
     Ok(())
@@ -44,15 +44,15 @@ fn tags_test() -> Result<()> {
 
 #[test]
 fn level_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::level, "Level: 19")?;
-    assert_eq!(parsed_data.as_str(), "Level: 19");
+    let parsed_data = GemParser::parse(Rule::level, "Level: 19")?;
+    assert_eq!(parsed_data.as_str(), "19");
 
     Ok(())
 }
 
 #[test]
 fn changes_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::gem_changes, "Attack Speed: 80% of base")?;
+    let parsed_data = GemParser::parse(Rule::gem_changes, "Attack Speed: 80% of base")?;
     assert_eq!(parsed_data.as_str(), "Attack Speed: 80% of base");
 
     Ok(())
@@ -60,23 +60,23 @@ fn changes_test() -> Result<()> {
 
 #[test]
 fn quality_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::quality, "Quality: +13% (augmented)")?;
-    assert_eq!(parsed_data.as_str(), "Quality: +13% (augmented)");
+    let parsed_data = GemParser::parse(Rule::quality, "Quality: +13% (augmented)")?;
+    assert_eq!(parsed_data.as_str(), "13");
 
     Ok(())
 }
 
 #[test]
 fn requirements_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::requirements,  "Requirements:\nLevel: 12")?;
-    assert_eq!(parsed_data.as_str(), "Requirements:\nLevel: 12");
+    let parsed_data = GemParser::parse(Rule::requirements,  "Requirements:\nLevel: 12")?;
+    assert_eq!(parsed_data.as_str(), "Level: 12");
 
     Ok(())
 }
 
 #[test]
 fn requirement_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::requirement,  "Int: 120")?;
+    let parsed_data = GemParser::parse(Rule::requirement,  "Int: 120")?;
     assert_eq!(parsed_data.as_str(), "Int: 120");
 
     Ok(())
@@ -84,7 +84,7 @@ fn requirement_test() -> Result<()> {
 
 #[test]
 fn description_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::description,  "Slam the ground, sending out rectangular fissures that deal area damage")?;
+    let parsed_data = GemParser::parse(Rule::description,  "Slam the ground, sending out rectangular fissures that deal area damage")?;
     assert_eq!(parsed_data.as_str(), "Slam the ground, sending out rectangular fissures that deal area damage");
 
     Ok(())
@@ -92,7 +92,7 @@ fn description_test() -> Result<()> {
 
 #[test]
 fn modifiers_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::modifiers,  "Base duration is 6.00 seconds\nShattering Spikes deal 30% less damage")?;
+    let parsed_data = GemParser::parse(Rule::modifiers,  "Base duration is 6.00 seconds\nShattering Spikes deal 30% less damage")?;
     assert_eq!(parsed_data.as_str(), "Base duration is 6.00 seconds\nShattering Spikes deal 30% less damage");
 
     Ok(())
@@ -100,15 +100,15 @@ fn modifiers_test() -> Result<()> {
 
 #[test]
 fn experience_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::experience,  "Experience: 1/15249")?;
-    assert_eq!(parsed_data.as_str(), "Experience: 1/15249");
+    let parsed_data = GemParser::parse(Rule::experience,  "Experience: 1/15249")?;
+    assert_eq!(parsed_data.as_str(), "1/15249");
 
     Ok(())
 }
 
 #[test]
 fn usage_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::usage,  "Place into an item socket of the right colour to gain this skill")?;
+    let parsed_data = GemParser::parse(Rule::usage,  "Place into an item socket of the right colour to gain this skill")?;
     assert_eq!(parsed_data.as_str(), "Place into an item socket of the right colour to gain this skill");
 
     Ok(())
@@ -116,7 +116,7 @@ fn usage_test() -> Result<()> {
 
 #[test]
 fn corrupted_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::corrupted,  "Corrupted")?;
+    let parsed_data = GemParser::parse(Rule::corrupted,  "Corrupted")?;
     assert_eq!(parsed_data.as_str(), "Corrupted");
 
     Ok(())
@@ -124,7 +124,7 @@ fn corrupted_test() -> Result<()> {
 
 #[test]
 fn note_test() -> Result<()> {
-    let parsed_data = Grammar::parse(Rule::note,  "Note: buy this gem")?;
+    let parsed_data = GemParser::parse(Rule::note,  "Note: buy this gem")?;
     assert_eq!(parsed_data.as_str(), "Note: buy this gem");
 
     Ok(())
@@ -133,5 +133,5 @@ fn note_test() -> Result<()> {
 #[test]
 #[should_panic]
 fn error_test() {
-    assert!(!Grammar::parse(Rule::name, "#wr0ng n4m3").is_err());
+    assert!(!GemParser::parse(Rule::name, "#wr0ng n4m3").is_err());
 }
