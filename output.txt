@@ -1,0 +1,40 @@
+ParsedGem {
+    item_class: "Skill Gems",
+    rarity: "Gem",
+    name: "Despair",
+    tags: [
+        "Spell",
+        "AoE",
+        "Duration",
+        "Chaos",
+        "Curse",
+        "Hex",
+    ],
+    level: 1,
+    gem_changes: Some(
+        [
+            "Cost: 16 Mana",
+            "Cast Time: 0.50 sec",
+        ],
+    ),
+    quality: 9,
+    requirements: [
+        "Level: 24",
+        "Dex: 25",
+        "Int: 37",
+    ],
+    description: "Curses all targets in an area, lowering their chaos resistance.",
+    modifiers: Some(
+        [
+            "Base duration is 8.00 seconds",
+            "4% increased Effect of Curse",
+            "Cursed enemies have -15% to Chaos Resistance",
+        ],
+    ),
+    experience: Some(
+        "1/118383",
+    ),
+    usage: "Place into an item socket of the right colour to gain this skill. Right click to remove from a socket.",
+    corrupted: true,
+    note: None,
+}

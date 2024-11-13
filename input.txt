@@ -1,0 +1,26 @@
+Item Class: Skill Gems
+Rarity: Gem
+Despair
+--------
+Spell, AoE, Duration, Chaos, Curse, Hex
+Level: 1
+Cost: 16 Mana
+Cast Time: 0.50 sec
+Quality: +9% (augmented)
+--------
+Requirements:
+Level: 24
+Dex: 25
+Int: 37
+--------
+Curses all targets in an area, lowering their chaos resistance.
+--------
+Base duration is 8.00 seconds
+4% increased Effect of Curse
+Cursed enemies have -15% to Chaos Resistance
+--------
+Experience: 1/118383
+--------
+Place into an item socket of the right colour to gain this skill. Right click to remove from a socket.
+--------
+Corrupted
